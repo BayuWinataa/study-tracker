@@ -15,15 +15,15 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children, userName, userImage, activeTab }: DashboardLayoutProps) {
   return (
-    <div className="flex h-screen overflow-hidden bg-background">
+    <div className="flex min-h-screen bg-background">
       {/* Desktop Sidebar */}
       <Sidebar userName={userName} activeTab={activeTab} />
 
       {/* Main Content Area */}
-      <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
+      <div className="flex-1 flex flex-col min-h-screen relative">
 
         {/* Top Navbar for Profile */}
-        <header className="flex items-center justify-between p-3.5 border-b border-border bg-background z-10 shrink-0">
+        <header className="sticky top-0 flex items-center justify-between p-3.5 border-b border-border bg-background z-10 shrink-0">
           <div className="flex items-center">
             {/* Mobile Logo */}
             <span className="md:hidden text-xl font-sans font-bold text-primary">Ajarin.</span>
@@ -58,7 +58,7 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
         </header>
 
         {/* Scrollable Content */}
-        <main className="flex-1 overflow-y-auto p-4 md:p-8 pb-24 md:pb-8">
+        <main className="flex-1 p-4 md:p-8 pb-24 md:pb-8">
           <div className="max-w-4xl mx-auto w-full">
             {children}
           </div>

@@ -7,6 +7,8 @@ const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
 });
 
+import { LenisProvider } from "@/components/providers/lenis-provider";
+
 export const metadata: Metadata = {
   title: "Ajarin Study Tracker",
   description: "Track your study streaks and climb the leaderboard",
@@ -26,7 +28,11 @@ export default function RootLayout({
         "--font-mono": "var(--font-sans)",
       } as React.CSSProperties}
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">{children}</body>
+      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+        <LenisProvider>
+          {children}
+        </LenisProvider>
+      </body>
     </html>
   );
 }
