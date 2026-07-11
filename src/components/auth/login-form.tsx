@@ -21,7 +21,7 @@ export function LoginForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<LoginInput>({
-    resolver: zodResolver(loginSchema) as any,
+    resolver: zodResolver(loginSchema as any),
     defaultValues: { email: "", password: "" },
   });
 

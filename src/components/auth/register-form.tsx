@@ -25,7 +25,7 @@ export function RegisterForm({ onSuccess }: RegisterFormProps) {
     formState: { errors },
     reset,
   } = useForm<RegisterInput>({
-    resolver: zodResolver(registerSchema) as any,
+    resolver: zodResolver(registerSchema as any),
     defaultValues: { name: "", email: "", password: "" },
   });
 
