@@ -4,8 +4,7 @@ import React, { useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import { checkIn } from '@/actions/streak';
 import { toast } from 'sonner';
-import { FaCircleCheck, FaSpinner, FaWandMagicSparkles } from 'react-icons/fa6';
-import confetti from 'canvas-confetti';
+import { FaSpinner } from 'react-icons/fa6';
 
 interface CheckInButtonProps {
   alreadyCheckedIn: boolean;
@@ -14,32 +13,6 @@ interface CheckInButtonProps {
 
 export function CheckInButton({ alreadyCheckedIn, onSuccess }: CheckInButtonProps) {
   const [isPending, startTransition] = useTransition();
-
-  const triggerConfetti = () => {
-    const duration = 3 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-
-    const randomInRange = (min: number, max: number) => Math.random() * (max - min) + min;
-
-    const interval: any = setInterval(function() {
-      const timeLeft = animationEnd - Date.now();
-
-      if (timeLeft <= 0) {
-        return clearInterval(interval);
-      }
-
-      const particleCount = 50 * (timeLeft / duration);
-      confetti({
-        ...defaults, particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 }
-      });
-      confetti({
-        ...defaults, particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 }
-      });
-    }, 250);
-  };
 
   const handleCheckIn = () => {
     startTransition(async () => {
@@ -51,10 +24,8 @@ export function CheckInButton({ alreadyCheckedIn, onSuccess }: CheckInButtonProp
           });
         } else {
           const res = result as any;
-          triggerConfetti();
           toast.success("Check-in successful!", {
             description: `You earned 10 points. Current streak: ${res.newStreak}🔥`,
-            icon: <FaCircleCheck className="h-5 w-5 text-primary" />
           });
 
           if (res.freezeUsed) {
@@ -91,33 +62,29 @@ export function CheckInButton({ alreadyCheckedIn, onSuccess }: CheckInButtonProp
 
   if (alreadyCheckedIn) {
     return (
-      <div className="w-full py-5 px-4 rounded-lg bg-green-50 dark:bg-green-950/30 border border-green-200 dark:border-green-900 flex items-center justify-center gap-2 text-green-700 dark:text-green-400 font-bold shadow-sm">
-          <FaCircleCheck className="mr-2 h-4 w-4" />
-        Checked In Today!
+      <div className="w-full py-6 px-4 border-2 border-foreground bg-foreground text-background flex flex-col items-center justify-center gap-1">
+        <span className="text-xl font-black uppercase tracking-widest">Logged</span>
+        <span className="text-xs font-bold uppercase tracking-widest opacity-70">See you tomorrow</span>
       </div>
     );
   }
 
   return (
-    <Button 
+    <button 
       onClick={handleCheckIn} 
       disabled={isPending}
-      className="w-full py-7 text-lg font-bold shadow-lg transition-all duration-300 relative overflow-hidden group bg-primary hover:bg-primary/90 text-primary-foreground"
+      className="w-full py-6 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground transition-colors duration-200 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed group"
     >
-      {/* Animated gradient background effect */}
-      <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-[150%] group-hover:animate-[shimmer_2s_infinite]" />
-      
       {isPending ? (
-        <span className="flex items-center gap-2">
-          <FaSpinner className="mr-2 h-4 w-4 animate-spin" />
-          Processing Check-in...
+        <span className="flex items-center gap-3 text-lg font-black uppercase tracking-widest">
+          <FaSpinner className="h-5 w-5 animate-spin" />
+          Processing
         </span>
       ) : (
-        <span className="flex items-center gap-2">
-          <FaWandMagicSparkles className="mr-2 h-4 w-4" />
-          Check-In Now!
+        <span className="flex items-center gap-3 text-lg font-black uppercase tracking-widest group-hover:scale-105 transition-transform">
+          Log Today's Session
         </span>
       )}
-    </Button>
+    </button>
   );
 }

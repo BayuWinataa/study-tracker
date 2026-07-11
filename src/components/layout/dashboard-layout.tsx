@@ -21,12 +21,12 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col h-screen overflow-hidden relative">
-        
+
         {/* Top Navbar for Profile */}
-        <header className="flex items-center justify-between p-4 border-b border-border bg-card shadow-sm z-10 shrink-0">
+        <header className="flex items-center justify-between p-3.5 border-b border-border bg-background z-10 shrink-0">
           <div className="flex items-center">
             {/* Mobile Logo */}
-            <span className="md:hidden text-xl font-serif font-bold text-primary">Ajarin.</span>
+            <span className="md:hidden text-xl font-sans font-bold text-primary">Ajarin.</span>
           </div>
 
           <div className="flex items-center gap-3">
@@ -41,7 +41,7 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
                 {userName || "Student"}
               </span>
             </div>
-            
+
             {/* Mobile Sign Out */}
             <form
               className="md:hidden ml-1"
@@ -65,14 +65,14 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
         </main>
 
         {/* Mobile Bottom Navigation */}
-        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-card border-t border-border flex items-center justify-around p-3 pb-safe z-20 shadow-[0_-4px_10px_rgba(0,0,0,0.05)]">
+        <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border flex items-center justify-around p-3 pb-safe z-20">
           <Link href="/" className={`flex flex-col items-center gap-1 ${activeTab === 'dashboard' ? 'text-primary' : 'text-muted-foreground'}`}>
             <FaTableColumns className="h-5 w-5" />
-            <span className="text-[10px] font-medium">Dashboard</span>
+            <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Dashboard</span>
           </Link>
           <Link href="/leaderboard" className={`flex flex-col items-center gap-1 ${activeTab === 'leaderboard' ? 'text-primary' : 'text-muted-foreground'}`}>
             <FaTrophy className="h-5 w-5" />
-            <span className="text-[10px] font-medium">Leaderboard</span>
+            <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Leaderboard</span>
           </Link>
         </nav>
       </div>

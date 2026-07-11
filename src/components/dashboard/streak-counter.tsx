@@ -11,42 +11,45 @@ interface StreakCounterProps {
 export function StreakCounter({ currentStreak, longestStreak, freezeAvailable }: StreakCounterProps) {
   const hasStreak = currentStreak > 0;
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div className="flex flex-col md:flex-row items-start md:items-end justify-between border-b-2 border-foreground pb-8 gap-8">
+      
       {/* Current Streak */}
-      <Card className="bg-card text-card-foreground border-border shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Current Streak</CardTitle>
-          <FaFire className={`h-12 w-12 ${hasStreak ? 'text-orange-500' : 'text-gray-400'} drop-shadow-sm transition-colors duration-500`} />
-        </CardHeader>
-        <CardContent>
-          <div className="text-3xl font-bold font-serif">{currentStreak}</div>
-          <p className="text-xs text-muted-foreground mt-1">Days in a row</p>
-        </CardContent>
-      </Card>
+      <div className="flex-1">
+        <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-2">
+          Current Streak
+        </h3>
+        <div className="flex items-end gap-3">
+          <span className={`text-7xl md:text-8xl font-black leading-none tracking-tighter ${hasStreak ? 'text-foreground' : 'text-muted-foreground/30'}`}>
+            {currentStreak}
+          </span>
+          <span className="text-xl font-bold uppercase tracking-widest text-muted-foreground pb-2">
+            Days
+          </span>
+        </div>
+      </div>
 
-      {/* Longest Streak */}
-      <Card className="bg-card text-card-foreground border-border shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Longest Streak</CardTitle>
-          <FaTrophy className="h-4 w-4 text-yellow-500" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-3xl font-bold font-serif">{longestStreak}</div>
-          <p className="text-xs text-muted-foreground mt-1">Personal best</p>
-        </CardContent>
-      </Card>
+      <div className="flex gap-12">
+        {/* Longest Streak */}
+        <div className="text-right">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">
+            Personal Best
+          </h3>
+          <span className="text-4xl font-black text-foreground">
+            {longestStreak}
+          </span>
+        </div>
 
-      {/* Freeze Token */}
-      <Card className="bg-card text-card-foreground border-border shadow-sm">
-        <CardHeader className="flex flex-row items-center justify-between pb-2">
-          <CardTitle className="text-sm font-medium text-muted-foreground">Freeze Tokens</CardTitle>
-          <FaSnowflake className={`h-5 w-5 ${freezeAvailable > 0 ? 'text-blue-300' : 'text-muted-foreground'}`} />
-        </CardHeader>
-        <CardContent>
-          <div className="text-3xl font-bold font-serif">{freezeAvailable}</div>
-          <p className="text-xs text-muted-foreground mt-1">Available to save streak</p>
-        </CardContent>
-      </Card>
+        {/* Freeze Tokens */}
+        <div className="text-right">
+          <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-1">
+            Freeze Tokens
+          </h3>
+          <span className={`text-4xl font-black ${freezeAvailable > 0 ? 'text-foreground' : 'text-muted-foreground/30'}`}>
+            {freezeAvailable}
+          </span>
+        </div>
+      </div>
+      
     </div>
   );
 }

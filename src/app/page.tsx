@@ -34,7 +34,7 @@ export default async function Home() {
   const currentStreak = streak?.currentStreak || 0;
   const longestStreak = streak?.longestStreak || 0;
   const freezeAvailable = streak?.freezeAvailable || 0;
-  
+
   // Fetch user rank
   const userRank = await getUserRank(userId);
 
@@ -63,44 +63,70 @@ export default async function Home() {
 
   return (
     <DashboardLayout userName={session.user.name} userImage={session.user.image} activeTab="dashboard">
-      <div className="space-y-8">
+      <div className="space-y-16">
+
+        {/* Header Section */}
+        <section className="border-b border-border pb-3">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-sans tracking-tight text-foreground">
+            Welcome back, {session.user.name?.split(" ")[0] || "Student"}.
+          </h1>
+          <p className="text-lg text-muted-foreground mt-4 font-medium max-w-2xl">
+            This is your personal command center. Track your habits, maintain your streak, and build discipline every single day.
+          </p>
+        </section>
+
+        {/* Top Analytics (Streak & Stats) */}
         <section>
-          <h2 className="text-2xl font-bold mb-4 font-serif">Your Dashboard</h2>
-          <StreakCounter 
-            currentStreak={currentStreak} 
-            longestStreak={longestStreak} 
-            freezeAvailable={freezeAvailable} 
+          <StreakCounter
+            currentStreak={currentStreak}
+            longestStreak={longestStreak}
+            freezeAvailable={freezeAvailable}
           />
         </section>
 
-        <section className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2 space-y-8">
-            <ActivityCalendar checkIns={checkIns} />
-          </div>
-          
-          <div className="space-y-6">
-            <div className="space-y-4">
-              <h3 className="text-lg font-bold font-serif mb-2">Daily Action</h3>
+        {/* Action & Calendar Section */}
+        <section className="grid grid-cols-1 lg:grid-cols-12 gap-12 border-t border-border pt-12">
+
+          {/* Left Column: Action */}
+          <div className="lg:col-span-5 xl:col-span-4 space-y-12">
+            <div>
+              <h2 className="text-xl font-bold font-sans uppercase tracking-widest text-foreground mb-6">
+                Daily Action
+              </h2>
               <CheckInButton alreadyCheckedIn={alreadyCheckedIn} />
-              <p className="text-xs text-center text-muted-foreground">
-                Build your study habits one day at a time.
-              </p>
-            </div>
-            
-            <div className="bg-card text-card-foreground border rounded-lg p-6 shadow-sm flex items-center justify-between">
-              <div>
-                <h4 className="text-sm font-medium text-muted-foreground">Global Rank</h4>
-                <div className="text-2xl font-bold font-serif flex items-center gap-2 mt-1">
-                  {userRank ? `#${userRank}` : "Unranked"}
-                </div>
-              </div>
-              <FaTrophy className="h-8 w-8 text-yellow-500 opacity-80" />
             </div>
 
-            <BadgeCase badges={userBadges} />
+            <div>
+              <h2 className="text-xl font-bold font-sans uppercase tracking-widest text-foreground mb-6">
+                Global Status
+              </h2>
+              <div className="flex items-end justify-between border-b-2 border-primary pb-4">
+                <span className="text-lg font-medium text-muted-foreground uppercase tracking-wide">Rank</span>
+                <span className="text-4xl font-black text-foreground">
+                  {userRank ? `#${userRank}` : "—"}
+                </span>
+              </div>
+            </div>
+
+            <div>
+              <h2 className="text-xl font-bold font-sans uppercase tracking-widest text-foreground mb-6">
+                Achievements
+              </h2>
+              <BadgeCase badges={userBadges} />
+            </div>
           </div>
+
+          {/* Right Column: Calendar */}
+          <div className="lg:col-span-7 xl:col-span-8">
+            <h2 className="text-xl font-bold font-sans uppercase tracking-widest text-foreground mb-6">
+              Consistency Map
+            </h2>
+            <ActivityCalendar checkIns={checkIns} />
+          </div>
+
         </section>
       </div>
     </DashboardLayout>
   );
+
 }

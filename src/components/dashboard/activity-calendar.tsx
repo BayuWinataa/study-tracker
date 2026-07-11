@@ -38,29 +38,30 @@ export function ActivityCalendar({ checkIns }: ActivityCalendarProps) {
   const prevMonth = () => setCurrentMonth(subMonths(currentMonth, 1));
 
   return (
-    <Card className="bg-card text-card-foreground border-border shadow-sm">
-      <CardHeader className="flex flex-row items-center justify-between pb-2">
-        <CardTitle className="text-lg font-serif font-bold text-primary">
+    <div className="w-full">
+      <div className="flex items-center justify-between border-b-2 border-foreground pb-4 mb-6">
+        <h3 className="text-xl font-bold font-sans tracking-tight text-foreground uppercase">
           {format(currentMonth, "MMMM yyyy")}
-        </CardTitle>
+        </h3>
         <div className="flex gap-2">
-          <Button variant="outline" size="icon" onClick={prevMonth} className="h-7 w-7">
+          <Button variant="outline" size="icon" onClick={prevMonth} className="h-8 w-8 rounded-none border-foreground hover:bg-foreground hover:text-background transition-colors">
             <FaChevronLeft className="h-4 w-4" />
           </Button>
-          <Button variant="outline" size="icon" onClick={nextMonth} className="h-7 w-7">
+          <Button variant="outline" size="icon" onClick={nextMonth} className="h-8 w-8 rounded-none border-foreground hover:bg-foreground hover:text-background transition-colors">
             <FaChevronRight className="h-4 w-4" />
           </Button>
         </div>
-      </CardHeader>
-      <CardContent>
-        <div className="grid grid-cols-7 gap-1 text-center mb-2">
+      </div>
+      
+      <div>
+        <div className="grid grid-cols-7 gap-1 text-center mb-4">
           {['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'].map((day) => (
-            <div key={day} className="text-xs font-medium text-muted-foreground py-1">
+            <div key={day} className="text-xs font-bold uppercase tracking-widest text-muted-foreground py-1">
               {day}
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-1">
+        <div className="grid grid-cols-7 gap-1 lg:gap-2">
           {days.map((day, idx) => {
             const isCheckedIn = checkIns.some((ci) => {
               // Convert DB UTC midnight date to the same day local
@@ -75,26 +76,22 @@ export function ActivityCalendar({ checkIns }: ActivityCalendarProps) {
             return (
               <div
                 key={idx}
-                className={`aspect-square flex items-center justify-center rounded-lg text-sm transition-all relative ${
-                  !isCurrentMonth ? 'text-muted-foreground/30' : ''
+                className={`aspect-square flex items-center justify-center text-sm font-bold transition-all relative border-2 ${
+                  !isCurrentMonth ? 'opacity-20 pointer-events-none' : ''
                 } ${
                   isCheckedIn 
-                    ? 'bg-primary text-primary-foreground font-bold shadow-sm ring-1 ring-primary/20' 
-                    : isCurrentMonth ? 'bg-secondary/20 hover:bg-secondary/40' : 'bg-transparent'
+                    ? 'bg-foreground border-foreground text-background' 
+                    : isCurrentMonth ? 'border-transparent bg-secondary/30 hover:border-foreground/30 text-foreground' : 'border-transparent text-transparent'
                 } ${
-                  isToday && !isCheckedIn ? 'border border-primary text-primary font-bold' : ''
+                  isToday && !isCheckedIn ? 'border-foreground text-foreground' : ''
                 }`}
               >
                 {format(day, dateFormat)}
-                
-                {isCheckedIn && (
-                  <span className="absolute bottom-1 w-1 h-1 rounded-full bg-background" />
-                )}
               </div>
             );
           })}
         </div>
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
