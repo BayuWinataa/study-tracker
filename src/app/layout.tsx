@@ -1,19 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Playfair_Display, JetBrains_Mono } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 
-const inter = Inter({
+const plusJakarta = Plus_Jakarta_Sans({
   variable: "--font-sans",
-  subsets: ["latin"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-serif",
-  subsets: ["latin"],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -30,7 +20,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${playfair.variable} ${jetbrainsMono.variable} h-full antialiased dark`}
+      className={`${plusJakarta.variable} h-full antialiased dark`}
+      style={{
+        "--font-serif": "var(--font-sans)",
+        "--font-mono": "var(--font-sans)",
+      } as React.CSSProperties}
     >
       <body className="min-h-full flex flex-col font-sans bg-background text-foreground">{children}</body>
     </html>
