@@ -17,7 +17,7 @@ export async function checkIn() {
     const todayWIB = getWIBDate();
 
     // Run transaction
-    const result = await prisma.$transaction(async (tx) => {
+    const result = await prisma.$transaction(async (tx: any) => {
       // Get or create streak
       const streak = await tx.streak.upsert({
         where: { userId },
