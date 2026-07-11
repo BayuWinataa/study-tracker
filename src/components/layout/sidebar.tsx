@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { signOut } from "@/lib/auth";
-import { FaTableColumns, FaTrophy, FaArrowRightFromBracket, FaBookOpen } from "react-icons/fa6";
+import { FaTableColumns, FaTrophy, FaArrowRightFromBracket, FaBookOpen, FaStopwatch } from "react-icons/fa6";
 
 interface SidebarProps {
   userName: string | null | undefined;
-  activeTab: "dashboard" | "leaderboard";
+  activeTab: "dashboard" | "leaderboard" | "focus";
 }
 
 export function Sidebar({ userName, activeTab }: SidebarProps) {
@@ -47,6 +47,21 @@ export function Sidebar({ userName, activeTab }: SidebarProps) {
           >
             <FaTrophy className="h-5 w-5" />
             Leaderboard
+          </Button>
+        </Link>
+
+        <Link href="/dashboard/focus">
+          <Button
+            variant="ghost"
+            className={`w-full justify-start gap-4 rounded-none border-l-4 transition-all duration-200 ${
+              activeTab === "focus" 
+                ? "border-foreground bg-foreground text-background font-black uppercase tracking-widest" 
+                : "border-transparent text-muted-foreground hover:bg-foreground/5 hover:text-foreground font-bold uppercase tracking-widest"
+            }`}
+            size="lg"
+          >
+            <FaStopwatch className="h-5 w-5" />
+            Focus Room
           </Button>
         </Link>
       </nav>

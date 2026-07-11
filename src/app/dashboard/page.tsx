@@ -32,6 +32,13 @@ export default async function DashboardPage() {
   // Fetch user rank
   const userRank = await getUserRank(userId);
 
+  // Fetch total points
+  const pointsAgg = await prisma.pointsLog.aggregate({
+    where: { userId },
+    _sum: { points: true }
+  });
+  const totalPoints = pointsAgg._sum.points || 0;
+
   // Check if already checked in today
   const lastCheckIn = streak?.lastCheckInDate;
   const alreadyCheckedIn = !!lastCheckIn && lastCheckIn.getTime() === todayWIB.getTime();
@@ -100,10 +107,18 @@ export default async function DashboardPage() {
                 Global Status
               </h2>
               <div className="flex items-end justify-between border-b-2 border-primary pb-4">
-                <span className="text-lg font-medium text-muted-foreground uppercase tracking-wide">Rank</span>
-                <span className="text-4xl font-black text-foreground">
-                  {userRank ? `#${userRank}` : "—"}
-                </span>
+                <div>
+                  <span className="block text-sm font-medium text-muted-foreground uppercase tracking-wide">Rank</span>
+                  <span className="text-4xl font-black text-foreground">
+                    {userRank ? `#${userRank}` : "—"}
+                  </span>
+                </div>
+                <div className="text-right">
+                  <span className="block text-sm font-medium text-muted-foreground uppercase tracking-wide">Points</span>
+                  <span className="text-4xl font-black text-primary">
+                    {totalPoints}
+                  </span>
+                </div>
               </div>
             </div>
 

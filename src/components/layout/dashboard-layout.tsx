@@ -1,7 +1,7 @@
 import React from "react";
 import { Sidebar } from "./sidebar";
 import Link from "next/link";
-import { FaArrowRightFromBracket, FaTableColumns, FaTrophy } from "react-icons/fa6";
+import { FaArrowRightFromBracket, FaTableColumns, FaTrophy, FaStopwatch } from "react-icons/fa6";
 import { signOut } from "@/lib/auth";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -10,7 +10,7 @@ interface DashboardLayoutProps {
   children: React.ReactNode;
   userName: string | null | undefined;
   userImage?: string | null | undefined;
-  activeTab: "dashboard" | "leaderboard";
+  activeTab: "dashboard" | "leaderboard" | "focus";
 }
 
 export function DashboardLayout({ children, userName, userImage, activeTab }: DashboardLayoutProps) {
@@ -72,7 +72,11 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
           </Link>
           <Link href="/leaderboard" className={`flex flex-col items-center gap-1 ${activeTab === 'leaderboard' ? 'text-primary' : 'text-muted-foreground'}`}>
             <FaTrophy className="h-5 w-5" />
-            <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Leaderboard</span>
+            <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Rank</span>
+          </Link>
+          <Link href="/dashboard/focus" className={`flex flex-col items-center gap-1 ${activeTab === 'focus' ? 'text-primary' : 'text-muted-foreground'}`}>
+            <FaStopwatch className="h-5 w-5" />
+            <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Focus</span>
           </Link>
         </nav>
       </div>

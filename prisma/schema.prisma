@@ -9,7 +9,6 @@ datasource db {
   provider = "postgresql"
 }
 
-
 model User {
   id            String          @id @default(cuid())
   name          String?
@@ -96,6 +95,7 @@ enum PointSource {
   STREAK_BONUS
   TUTORING_SESSION
   QUIZ
+  FOCUS_SESSION
 }
 
 model PointsLog {
