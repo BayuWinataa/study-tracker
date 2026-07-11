@@ -61,6 +61,11 @@ export default async function Home() {
     orderBy: { earnedAt: 'desc' }
   });
 
+  // Fetch all available badges
+  const allBadges = await prisma.badge.findMany({
+    orderBy: { id: 'asc' }
+  });
+
   return (
     <DashboardLayout userName={session.user.name} userImage={session.user.image} activeTab="dashboard">
       <div className="space-y-16">
@@ -112,7 +117,7 @@ export default async function Home() {
               <h2 className="text-xl font-bold font-sans uppercase tracking-widest text-foreground mb-6">
                 Achievements
               </h2>
-              <BadgeCase badges={userBadges} />
+              <BadgeCase badges={userBadges} allBadges={allBadges} />
             </div>
           </div>
 

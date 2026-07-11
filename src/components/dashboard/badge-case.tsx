@@ -6,6 +6,7 @@ export interface UserBadgeWithDetails {
   id: string;
   earnedAt: Date;
   badge: {
+    id: string;
     name: string;
     description: string;
     icon: string;
@@ -14,33 +15,67 @@ export interface UserBadgeWithDetails {
 
 interface BadgeCaseProps {
   badges: UserBadgeWithDetails[];
+  allBadges?: {
+    id: string;
+    name: string;
+    description: string;
+    icon: string;
+  }[];
 }
 
-export function BadgeCase({ badges }: BadgeCaseProps) {
+export function BadgeCase({ badges, allBadges = [] }: BadgeCaseProps) {
+  if (allBadges.length === 0) {
+    return (
+      <div className="text-center py-8 border-2 border-dashed border-muted-foreground/30 text-muted-foreground">
+        <p className="text-sm font-bold uppercase tracking-widest">No badges available</p>
+      </div>
+    );
+  }
+
+  // Sort badges: Earned first, then by ID
+  const sortedBadges = [...allBadges].sort((a, b) => {
+    const aEarned = badges.some((ub) => ub.badge.id === a.id);
+    const bEarned = badges.some((ub) => ub.badge.id === b.id);
+    if (aEarned && !bEarned) return -1;
+    if (!aEarned && bEarned) return 1;
+    return a.id.localeCompare(b.id);
+  });
+
   return (
     <div className="w-full">
-      {badges.length === 0 ? (
-        <div className="text-center py-8 border-2 border-dashed border-muted-foreground/30 text-muted-foreground">
-          <p className="text-sm font-bold uppercase tracking-widest">No badges yet</p>
-        </div>
-      ) : (
-        <div className="grid grid-cols-2 gap-4">
-          {badges.map((userBadge) => (
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        {sortedBadges.map((badge) => {
+          const isEarned = badges.some((b) => b.badge.id === badge.id);
+
+          return (
             <div 
-              key={userBadge.id} 
-              className="flex flex-col items-start p-4 border-2 border-foreground bg-background hover:bg-foreground hover:text-background text-foreground transition-colors group cursor-default"
-              title={userBadge.badge.description}
+              key={badge.id} 
+              className={`flex flex-col items-start p-4 border-2 transition-colors group cursor-default ${
+                isEarned 
+                  ? "border-foreground bg-background hover:bg-foreground hover:text-background text-foreground" 
+                  : "border-muted-foreground/30 bg-background text-muted-foreground/60"
+              }`}
             >
-              <div className="text-3xl mb-3 grayscale group-hover:grayscale-0 transition-all duration-300">
-                {userBadge.badge.icon}
+              <div className="flex items-center justify-between w-full mb-3">
+                <div className={`text-3xl transition-all duration-300 ${isEarned ? "grayscale group-hover:grayscale-0" : "grayscale opacity-50"}`}>
+                  {badge.icon}
+                </div>
+                {!isEarned && (
+                  <span className="text-[10px] font-bold uppercase tracking-widest border border-muted-foreground/30 px-2 py-0.5">
+                    Locked
+                  </span>
+                )}
               </div>
-              <h4 className="text-xs font-black uppercase tracking-widest leading-tight">
-                {userBadge.badge.name}
+              <h4 className="text-sm font-black uppercase tracking-widest leading-tight mb-2">
+                {badge.name}
               </h4>
+              <p className={`text-xs font-medium leading-snug ${isEarned ? "group-hover:text-background/80" : ""}`}>
+                {badge.description}
+              </p>
             </div>
-          ))}
-        </div>
-      )}
+          );
+        })}
+      </div>
     </div>
   );
 }
