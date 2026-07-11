@@ -33,13 +33,13 @@ export async function getLeaderboard(period: 'weekly' | 'all-time'): Promise<Lea
       take: 100,
     });
 
-    const userIds = leaderboardData.map(l => l.userId);
+    const userIds = leaderboardData.map((l: any) => l.userId);
     const users = await prisma.user.findMany({
       where: { id: { in: userIds } },
       select: { id: true, name: true, image: true },
     });
 
-    return leaderboardData.map((l) => ({
+    return leaderboardData.map((l: any) => ({
       userId: l.userId,
       points: l._sum.points || 0,
       user: users.find((u) => u.id === l.userId),
