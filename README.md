@@ -14,6 +14,7 @@
 * **Database & ORM**: PostgreSQL (via Neon Database) & Prisma ORM.
 * **Form Validation**: React Hook Form & Zod.
 * **UI Components**: shadcn/ui (Radix UI) & React Icons.
+* **Testing**: Vitest.
 
 ### Architecture & Decisions
 * **Struktur Project (App Router)**: Memisahkan Halaman Pemasaran (`/`) dari Halaman Aplikasi (`/dashboard`). Hal ini dilakukan agar logika autentikasi dan antarmuka berat tidak membebani halaman pendaratan (Landing Page) yang harus dimuat dengan sangat cepat.
@@ -55,7 +56,9 @@
 * **Bug/Masalah yang Ditemukan**: 
   1. *Build error* di Vercel akibat ketidakcocokan *type definition* pada `zodResolver`.
   2. Poin Pomodoro sempat tidak bertambah pasca-penyelesaian karena `Prisma Client` di Node.js (saat proses *dev*) gagal mendeteksi enum `FOCUS_SESSION` baru.
+  3. Kesalahan komputasi tanggal pada diagram Chart (error "Expected 0 arguments") dan masalah pergeseran hari yang tidak akurat karena ketidaksesuaian zona waktu server dengan WIB.
 * **Cara Masalah Diselesaikan**: 
   1. Melakukan *cast* argumen dengan pengecualian tipe (`registerSchema as any`) untuk lolos dari *TypeScript checker* tanpa merusak fungsi validasi di *runtime*.
   2. Mengeksekusi ulang kompilasi skema dengan `pnpm exec prisma generate` serta me-restart server Next.js agar tipe data *database* yang baru segera dimuat ke dalam memori aplikasi.
+  3. Memodifikasi fungsi utilitas `getWIBDate` agar dapat memproses parameter *custom date*, serta beralih menggunakan `.getUTCDay()` alih-alih `.getDay()` biasa untuk mengamankan data kalender UTC dari interferensi *local time* server.
 * **Peran AI Selama Proses**: AI beroperasi layaknya *Senior Full-Stack Engineer*, dari merencanakan *Implementation Plan*, melacak masalah langsung dari bacaan *terminal output*, mengeksekusi integrasi *React Hook Form*, hingga menyusun *styling* aplikasi secara menyeluruh dan independen.
