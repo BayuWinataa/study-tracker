@@ -7,6 +7,7 @@ import { ActivityCalendar } from "@/components/dashboard/activity-calendar";
 import { CheckInButton } from "@/components/dashboard/checkin-button";
 import { getUserRank } from "@/actions/leaderboard";
 import { BadgeCase } from "@/components/dashboard/badge-case";
+import { ActivityChart } from "@/components/dashboard/activity-chart";
 import { DashboardLayout } from "@/components/layout/dashboard-layout";
 import { redirect } from "next/navigation";
 
@@ -88,6 +89,9 @@ export default async function DashboardPage() {
             longestStreak={longestStreak}
             freezeAvailable={freezeAvailable}
           />
+          <div className="mt-8">
+            <ActivityChart />
+          </div>
         </section>
 
         {/* Action & Calendar Section */}

@@ -22,13 +22,13 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${plusJakarta.variable} h-full antialiased dark`}
+      className={`${plusJakarta.variable} antialiased dark`}
       style={{
         "--font-serif": "var(--font-sans)",
         "--font-mono": "var(--font-sans)",
       } as React.CSSProperties}
     >
-      <body className="min-h-full flex flex-col font-sans bg-background text-foreground">
+      <body className="flex flex-col font-sans bg-background text-foreground">
         <LenisProvider>
           {children}
         </LenisProvider>
