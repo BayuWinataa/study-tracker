@@ -6,7 +6,11 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { FaBookOpen, FaTrophy, FaBrain, FaRegCircleCheck, FaMedal, FaChartLine } from "react-icons/fa6";
 
-export function LandingPage() {
+interface LandingPageProps {
+  isLoggedIn?: boolean;
+}
+
+export function LandingPage({ isLoggedIn }: LandingPageProps = {}) {
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
 
@@ -17,11 +21,19 @@ export function LandingPage() {
           <span className="text-xl font-serif font-bold text-primary tracking-tight">Ajarin.</span>
         </div>
         <div className="flex items-center gap-4">
-          <Link href="/login">
-            <Button className="w-auto bg-transparent border border-primary/30 hover:bg-primary/10 text-primary px-6 py-2 h-auto text-sm rounded-full">
-              Sign In
-            </Button>
-          </Link>
+          {isLoggedIn ? (
+            <Link href="/dashboard">
+              <Button className="w-auto bg-transparent border border-primary/30 hover:bg-primary/10 text-primary px-6 py-2 h-auto text-sm rounded-full">
+                Go to Dashboard
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/login">
+              <Button className="w-auto bg-transparent border border-primary/30 hover:bg-primary/10 text-primary px-6 py-2 h-auto text-sm rounded-full">
+                Sign In
+              </Button>
+            </Link>
+          )}
         </div>
       </header>
 
@@ -42,9 +54,9 @@ export function LandingPage() {
           </p>
 
           <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-            <Link href="/login" className="w-full sm:w-auto">
+            <Link href={isLoggedIn ? "/dashboard" : "/login"} className="w-full sm:w-auto">
               <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-6 text-base font-medium transition-transform hover:-translate-y-0.5 active:translate-y-0 shadow-sm">
-                Start tracking — it's free
+                {isLoggedIn ? "Go to your Dashboard" : "Start tracking — it's free"}
               </Button>
             </Link>
           </div>
@@ -147,9 +159,9 @@ export function LandingPage() {
               No ads. No clutter. Just you and your goals. Join focused learners who have already taken control of their study habits.
             </p>
             <div className="pt-4 flex justify-center">
-              <Link href="/login" className="w-full sm:w-auto">
+              <Link href={isLoggedIn ? "/dashboard" : "/login"} className="w-full sm:w-auto">
                 <Button className="w-full sm:w-auto bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-base font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0">
-                  Get Started
+                  {isLoggedIn ? "Open Dashboard" : "Get Started"}
                 </Button>
               </Link>
             </div>

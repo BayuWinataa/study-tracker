@@ -56,7 +56,7 @@ export default function LoginPage() {
         setError("Invalid email or password.");
         setLoading(false);
       } else {
-        router.push("/");
+        router.push("/dashboard");
         router.refresh();
       }
     }
@@ -64,7 +64,7 @@ export default function LoginPage() {
 
   const handleGoogleLogin = () => {
     setIsGoogleLoading(true);
-    signIn("google", { callbackUrl: "/" });
+    signIn("google", { callbackUrl: "/dashboard" });
   };
 
   return (

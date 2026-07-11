@@ -20,7 +20,7 @@ export function Sidebar({ userName, activeTab }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 p-4 space-y-4 overflow-y-auto">
-        <Link href="/">
+        <Link href="/dashboard">
           <Button
             variant="ghost"
             className={`w-full justify-start gap-4 rounded-none border-l-4 transition-all duration-200 ${

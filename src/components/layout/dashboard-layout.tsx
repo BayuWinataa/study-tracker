@@ -66,7 +66,7 @@ export function DashboardLayout({ children, userName, userImage, activeTab }: Da
 
         {/* Mobile Bottom Navigation */}
         <nav className="md:hidden fixed bottom-0 left-0 right-0 bg-background border-t border-border flex items-center justify-around p-3 pb-safe z-20">
-          <Link href="/" className={`flex flex-col items-center gap-1 ${activeTab === 'dashboard' ? 'text-primary' : 'text-muted-foreground'}`}>
+          <Link href="/dashboard" className={`flex flex-col items-center gap-1 ${activeTab === 'dashboard' ? 'text-primary' : 'text-muted-foreground'}`}>
             <FaTableColumns className="h-5 w-5" />
             <span className="text-[10px] font-medium font-sans uppercase tracking-widest">Dashboard</span>
           </Link>
