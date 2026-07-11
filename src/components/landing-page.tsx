@@ -4,7 +4,7 @@ import React from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { FaBookOpen, FaTrophy, FaBrain } from "react-icons/fa6";
+import { FaBookOpen, FaTrophy, FaBrain, FaRegCircleCheck, FaMedal, FaChartLine } from "react-icons/fa6";
 
 export function LandingPage() {
   return (
@@ -26,103 +26,144 @@ export function LandingPage() {
       </header>
 
       {/* Hero Section */}
-      <main className="flex-1 flex flex-col lg:flex-row items-center justify-center p-6 md:p-12 z-10 relative max-w-7xl mx-auto w-full gap-12 lg:gap-24 min-h-[90vh]">
+      <main className="flex-1 flex flex-col lg:flex-row items-center justify-between p-6 md:p-12 z-10 relative max-w-7xl mx-auto w-full gap-8 lg:gap-16 min-h-[85vh] pt-12 lg:pt-0">
 
         {/* Left Column: Copy */}
-        <div className="flex-1 space-y-8 max-w-2xl text-center lg:text-left">
-          <h1 className="text-5xl md:text-7xl font-sans font-medium leading-[1.1] tracking-tight text-white">
-            Focus. <br />
-            <span className="text-primary italic font-serif">Reflect.</span> <br />
-            Achieve.
+        <div className="flex-1 space-y-8  text-center lg:text-left z-20">
+
+          <h1 className="text-5xl md:text-7xl font-sans font-semibold leading-[1.1] tracking-tight text-white">
+            Focus deeply.<br />
+            Track progress.<br />
+            <span className="text-white/40">Achieve more.</span>
           </h1>
-          <p className="text-lg md:text-xl text-muted-foreground/90 font-serif leading-relaxed max-w-lg mx-auto lg:mx-0">
-            Mindful moments for your daily study streak. Build habits that last, track your progress, and climb the global leaderboard.
+
+          <p className="text-lg md:text-xl text-white/70 leading-relaxed max-w-lg mx-auto lg:mx-0">
+            A minimalist space designed for mindful studying. Build unbreakable habits, visualize your consistency, and join a community of focused learners.
           </p>
 
-          <div className="pt-4 flex justify-center lg:justify-start">
+          <div className="pt-4 flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
             <Link href="/login" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-10 py-7 text-lg font-bold shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 border-none">
-                Start Your Journey
+              <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-8 py-6 text-base font-medium transition-transform hover:-translate-y-0.5 active:translate-y-0 shadow-sm">
+                Start tracking — it's free
               </Button>
             </Link>
           </div>
         </div>
 
-        {/* Right Column: Lottie Animation */}
-        <div className="flex-1 w-full  hidden md:flex items-center justify-center relative">
-          <DotLottieReact
-            src="https://assets3.lottiefiles.com/packages/lf20_w51pcehl.json"
-            loop
-            autoplay
-            className="w-full h-full relative z-10"
-          />
+        {/* Right Column: Minimalist Lottie */}
+        <div className="flex-1 w-full hidden md:flex items-center justify-center relative z-10 mt-12 lg:mt-0">
+          <div className="relative w-full aspect-square max-w-[600px] xl:max-w-[800px]  transition-transform duration-500 ">
+            <DotLottieReact
+              src="/Study.lottie"
+              loop
+              autoplay
+            />
+          </div>
         </div>
 
       </main>
 
-      {/* Features Section */}
-      <section className="bg-[#F8F3EE] text-[#1C322D] py-24 px-6 relative z-10">
-        <div className="max-w-7xl mx-auto space-y-16">
-          <div className="text-center max-w-2xl mx-auto space-y-4">
-            <h2 className="text-3xl md:text-5xl font-sans font-bold tracking-tight">Master Your Mind</h2>
-            <p className="text-lg font-serif text-[#1C322D]/70 leading-relaxed">
-              We built Ajarin to be more than just a habit tracker. It is a mindful space designed specifically to keep your brain sharply focused on studying, day after day.
+      {/* Features Section - Anti-Slop Design */}
+      <section className="bg-white text-black py-32 px-6 relative z-10 border-t border-black/5">
+        <div className="container mx-auto flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
+
+          {/* Left Column: Features List */}
+          <div className="flex-1 space-y-12 w-full">
+            <div className="space-y-4">
+              <h2 className="text-3xl md:text-5xl  font-bold  text-black text-center sm:text-left">
+                Engineered for consistency.
+              </h2>
+              <p className="text-lg text-black/60 max-w-md leading-relaxed">
+                We stripped away the noise. What remains is a focused tool designed to build your momentum, day after day.
+              </p>
+            </div>
+
+            <div className="space-y-10">
+              {/* Feature 1 */}
+              <div className="flex gap-6">
+                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black/5 text-black">
+                  <FaRegCircleCheck className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-sans mb-2">Frictionless Logging</h3>
+                  <p className="text-black/60 leading-relaxed text-sm">
+                    No complex forms. Check in with a single click. Visualize your growing streak and let psychology do the heavy lifting.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 2 */}
+              <div className="flex gap-6">
+                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black/5 text-black">
+                  <FaMedal className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-sans mb-2">Meaningful Milestones</h3>
+                  <p className="text-black/60 leading-relaxed text-sm">
+                    Unlock exclusive badges that actually mean something. From the 7-Day Warrior to the Monthly Master.
+                  </p>
+                </div>
+              </div>
+
+              {/* Feature 3 */}
+              <div className="flex gap-6">
+                <div className="mt-1 flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black/5 text-black">
+                  <FaChartLine className="h-5 w-5" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold font-sans mb-2">Global Benchmarks</h3>
+                  <p className="text-black/60 leading-relaxed text-sm">
+                    Measure your dedication against peers worldwide. The leaderboard isn't a game, it's a mirror of your discipline.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Lottie Animation */}
+          <div className="flex-1 w-full hidden lg:block  rounded-[2.5rem]  flex items-center justify-center ">
+            <div className="relative w-full aspect-square">
+              <DotLottieReact
+                src="/Looping shapes.lottie"
+                loop
+                autoplay
+                className="w-full h-full opacity-80 mix-blend-multiply"
+              />
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      {/* CTA Section - Minimalist & Confident */}
+      <section className="py-32 px-6 relative z-10 flex justify-center container mx-auto">
+        <div className="w-full  bg-white/5 border border-white/10 rounded-[2rem] p-12 md:p-20 text-center backdrop-blur-sm">
+          <div className=" space-y-8">
+            <h2 className="text-4xl md:text-5xl font-sans font-semibold tracking-tight text-white leading-tight">
+              Stop tracking time.<br />
+              Start building discipline.
+            </h2>
+            <p className="text-lg text-white/60">
+              No ads. No clutter. Just you and your goals. Join focused learners who have already taken control of their study habits.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-black/5">
-              <div className="h-12 w-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mb-6">
-                <span className="text-2xl">🌱</span>
-              </div>
-              <h3 className="text-xl font-bold font-serif mb-3">Daily Habit Check-in</h3>
-              <p className="text-[#1C322D]/70 text-sm leading-relaxed">
-                Log your study sessions with a single mindful click. Watch your streak grow and let momentum carry you forward.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-black/5">
-              <div className="h-12 w-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mb-6">
-                <span className="text-2xl">🏆</span>
-              </div>
-              <h3 className="text-xl font-bold font-serif mb-3">Earn Trophies</h3>
-              <p className="text-[#1C322D]/70 text-sm leading-relaxed">
-                Unlock exclusive badges like the "7-Day Warrior" or "Monthly Master" to decorate your personal trophy case.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-sm hover:shadow-md transition-shadow border border-black/5">
-              <div className="h-12 w-12 bg-primary/20 text-primary rounded-xl flex items-center justify-center mb-6">
-                <span className="text-2xl">🌍</span>
-              </div>
-              <h3 className="text-xl font-bold font-serif mb-3">Global Leaderboard</h3>
-              <p className="text-[#1C322D]/70 text-sm leading-relaxed">
-                See how you stack up against top learners worldwide. Compete healthily to maintain your place at the top.
-              </p>
+            <div className="pt-4 flex justify-center">
+              <Link href="/login" className="w-full sm:w-auto">
+                <Button className="w-full sm:w-auto bg-white text-black hover:bg-white/90 rounded-full px-8 py-6 text-base font-semibold transition-transform hover:-translate-y-0.5 active:translate-y-0">
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* CTA Section */}
-      <section className="py-24 px-6 relative z-10 text-center">
-        <div className="max-w-3xl mx-auto space-y-8">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white">Ready to break your limits?</h2>
-          <p className="text-lg text-muted-foreground font-serif">Join hundreds of students mastering their study habits.</p>
-          <div className="flex justify-center">
-            <Link href="/login" className="w-full sm:w-auto">
-              <Button className="w-full sm:w-auto bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-10 py-6 text-lg font-bold shadow-xl shadow-primary/20 transition-all hover:scale-105 active:scale-95 border-none">
-                Start Now — It's Free
-              </Button>
-            </Link>
-          </div>
+      {/* Minimal Footer */}
+      <footer className="py-12 text-center text-sm text-white/40 border-t border-white/10 relative z-10 flex flex-col items-center justify-center gap-2">
+        <div className="flex items-center gap-2 mb-2">
+          <FaBookOpen className="h-4 w-4 text-white/30" />
+          <span className="font-semibold tracking-tight text-white/50">Ajarin.</span>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="py-8 text-center text-sm text-muted-foreground/60 border-t border-white/5 relative z-10">
-        <p>© 2026 Ajarin Study Tracker. All rights reserved.</p>
-        <p className="mt-1">Designed for deep focus & mindful moments.</p>
+        <p>© 2026 Ajarin. All rights reserved.</p>
       </footer>
     </div>
   );
