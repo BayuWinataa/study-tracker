@@ -42,7 +42,7 @@ export async function getLeaderboard(period: 'weekly' | 'all-time'): Promise<Lea
     return leaderboardData.map((l: any) => ({
       userId: l.userId,
       points: l._sum.points || 0,
-      user: users.find((u) => u.id === l.userId),
+      user: users.find((u: any) => u.id === l.userId),
     }));
   } catch (error) {
     console.error("Leaderboard fetch error:", error);
